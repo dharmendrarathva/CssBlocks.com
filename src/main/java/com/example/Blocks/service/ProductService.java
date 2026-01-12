@@ -20,6 +20,12 @@ public class ProductService {
         Product p = new Product();
         p.setName(req.getName());
         p.setCode(req.getCode());
+
+        // NEW MAPPING
+        p.setHtmlCode(req.getHtmlCode());
+        p.setCssCode(req.getCssCode());
+        p.setJsCode(req.getJsCode());
+
         return repo.save(p);
     }
 
@@ -36,6 +42,12 @@ public class ProductService {
         Product p = getById(id);
         p.setName(req.getName());
         p.setCode(req.getCode());
+
+        // NEW MAPPING
+        p.setHtmlCode(req.getHtmlCode());
+        p.setCssCode(req.getCssCode());
+        p.setJsCode(req.getJsCode());
+
         return repo.save(p);
     }
 
