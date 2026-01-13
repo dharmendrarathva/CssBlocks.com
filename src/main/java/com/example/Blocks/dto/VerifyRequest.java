@@ -1,12 +1,9 @@
 package com.example.Blocks.dto;
 
-
 import lombok.Data;
 
 @Data
-public class RegisterRequest {
+public class VerifyRequest {
     private String email;
-    private String password;
-    private String role;
+    private String code;
 }
-

@@ -1,17 +1,16 @@
-package com.example.Blocks.entity;
+package com.example.Blocks.dto;
 
 import lombok.Data;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
+@Document(collection = "verification_tokens")
 @Data
-@Document(collection = "users")
-public class User {
+public class VerificationToken {
 
     @Id
     private String id;
     private String email;
-    private String password;
-    private Role role;
-    private boolean enabled;
+    private String code;
+    private long expiresAt;
 }

@@ -1,7 +1,7 @@
 package com.example.Blocks.security;
 
-
 import com.example.Blocks.repository.UserRepository;
+import org.springframework.security.authentication.DisabledException;
 import org.springframework.security.core.userdetails.*;
 import org.springframework.stereotype.Service;
 
@@ -15,12 +15,16 @@ public class CustomUserDetailsService implements UserDetailsService {
     }
 
     @Override
-    public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        var user = repo.findByUsername(username)
+    public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
+
+        var user = repo.findByEmail(email)
                 .orElseThrow(() -> new UsernameNotFoundException("User not found"));
 
+        if (!user.isEnabled())
+            throw new DisabledException("Email not verified");
+
         return org.springframework.security.core.userdetails.User.builder()
-                .username(user.getUsername())
+                .username(user.getEmail())
                 .password(user.getPassword())
                 .roles(user.getRole().name())
                 .build();

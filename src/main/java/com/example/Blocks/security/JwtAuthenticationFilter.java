@@ -1,6 +1,5 @@
 package com.example.Blocks.security;
 
-
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.http.*;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -21,6 +20,13 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
     }
 
     @Override
+    protected boolean shouldNotFilter(HttpServletRequest request) {
+        String path = request.getRequestURI();
+        return path.startsWith("/api/auth/")
+                || path.startsWith("/api/email/");
+    }
+
+    @Override
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain chain) {
         try {
             String header = request.getHeader("Authorization");
@@ -37,10 +43,11 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
                 auth.setDetails(new WebAuthenticationDetailsSource().buildDetails(request));
                 SecurityContextHolder.getContext().setAuthentication(auth);
             }
+
             chain.doFilter(request, response);
+
         } catch (Exception e) {
             response.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
         }
     }
 }
-

@@ -1,0 +1,6 @@
+resend:
+  api-key: re_91KpNFZg_NRdEh4SH9bhshJqnF1Pwknat
+  from: "onboarding@resend.dev"
+logging:
+  level:
+    org.springframework.web.reactive.function.client: DEBUG
