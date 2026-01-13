@@ -7,7 +7,6 @@ public class ProductRequest {
     private String name;
     private String code;
 
-    // NEW FIELDS
     private String htmlCode;
     private String cssCode;
     private String jsCode;

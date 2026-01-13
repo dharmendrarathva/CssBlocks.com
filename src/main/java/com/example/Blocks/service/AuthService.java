@@ -49,7 +49,7 @@ public class AuthService {
         user.setRole(Role.valueOf(request.getRole()));
         user.setEnabled(false);
 
-        repo.save(user);
+        repo.save(user);    
 
         String code = String.valueOf(100000 + new Random().nextInt(900000));
 

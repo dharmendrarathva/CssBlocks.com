@@ -29,7 +29,10 @@ public class SecurityConfig {
                 .csrf(AbstractHttpConfigurer::disable)
                 .authorizeHttpRequests(auth -> auth
 
-                        // Public
+                        // Allow CORS preflight
+                        .requestMatchers(HttpMethod.OPTIONS, "/**").permitAll()
+
+                        // Public auth/email
                         .requestMatchers("/api/auth/**", "/api/email/**").permitAll()
 
                         // Products
@@ -43,8 +46,6 @@ public class SecurityConfig {
                         // Everything else
                         .anyRequest().authenticated()
                 )
-
-
                 .sessionManagement(s -> s.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
                 .addFilterBefore(jwtFilter, UsernamePasswordAuthenticationFilter.class);
 
