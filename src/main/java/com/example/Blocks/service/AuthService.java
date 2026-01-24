@@ -56,7 +56,7 @@ public class AuthService {
         VerificationToken token = new VerificationToken();
         token.setEmail(user.getEmail());
         token.setCode(code);
-        token.setExpiresAt(System.currentTimeMillis() + 10 * 60 * 1000);
+        token.setExpiresAt(System.currentTimeMillis() + 30 * 60 * 1000);
 
         tokenRepo.save(token);
 
